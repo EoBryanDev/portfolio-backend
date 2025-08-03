@@ -5,7 +5,7 @@ interface IUser {
   username: string;
   password: string;
   email: string;
-  role: TRoles;
+  role?: TRoles;
   birthDate: string;
   createdAt?: string;
   active?: boolean;

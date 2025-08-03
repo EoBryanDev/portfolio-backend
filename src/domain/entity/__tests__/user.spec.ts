@@ -4,15 +4,13 @@ import { User } from '../User'
 
 describe('User', () => {
 
-  it('should create a new user', () => {
+  it('should create a new common user', () => {
     // Arrange
     const user: IUser = {
-      username: 'admin',
+      username: 'teste',
       password: '1234',
       email: 'teste@teste.com',
-      role: 'ADMIN',
-      birthDate: '1998-01-29',
-      active: false
+      birthDate: '1998-01-29'
     }
 
     // Act
@@ -20,15 +18,33 @@ describe('User', () => {
 
     // Assert
     expect(newUser).toBeInstanceOf(User)
+    expect(newUser.getUserInfo().role).toBe('USER')
   })
 
-  it('should return user info', () => {
+  it('should create a admin user', () => {
+    // Arrange
+    const user: IUser = {
+      username: 'admin',
+      password: '1234',
+      email: 'admin@admin.com',
+      birthDate: '1998-01-29',
+      role: 'ADMIN'
+    }
+
+    // Act
+    const newUser = new User(user)
+
+    // Assert
+    expect(newUser).toBeInstanceOf(User)
+    expect(newUser.getUserInfo().role).toBe('ADMIN')
+  })
+
+  it('should return infomations default', () => {
     // Arrange
     const user: IUser = {
       username: 'admin',
       password: '1234',
       email: 'teste@teste.com',
-      role: 'ADMIN',
       birthDate: '1998-01-29'
     }
 
@@ -36,10 +52,10 @@ describe('User', () => {
     const newUser = new User(user);
     const userInfo = newUser.getUserInfo();
 
-    console.log(userInfo);
     // Assert
-
-    expect(userInfo).toBeTruthy()
+    expect(userInfo.id).toBeTruthy()
+    expect(userInfo.createdAt).toBeTruthy()
+    expect(userInfo.role).toBeTruthy()
   })
 
 

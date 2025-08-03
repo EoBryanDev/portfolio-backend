@@ -6,11 +6,12 @@ class User {
 
   constructor(props: IUser) {
 
-    const user = {
+    const user: IUser = {
       ...props,
       id: props.id ? props.id : '123',
       createdAt: props.createdAt ? props.createdAt : new Date().toISOString(),
-      active: props.active ? props.active : true
+      active: props.active ? props.active : true,
+      role: props.role ? props.role : 'USER'
     }
 
     this.props = user
