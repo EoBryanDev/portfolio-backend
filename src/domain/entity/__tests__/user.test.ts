@@ -1,7 +1,7 @@
-import { IUser, IUserProps } from '@/domain/interfaces/IUser'
+import { IUserProps } from '@/domain/interfaces/IUser'
 import { describe, it, expect } from 'vitest'
 import { User } from '../User'
-import { UUID } from '../../services/UUID'
+import { CryptoUUID } from '../../services/CryptoUUID';
 
 describe('User Entity', () => {
 
@@ -14,17 +14,14 @@ describe('User Entity', () => {
       email: 'teste@teste.com',
       birthDate: '1998-01-29'
     }
+    const idGenerator = new CryptoUUID();
 
     // Act
-    const newUser = new User(user)
-
-    console.log(newUser);
-
+    const newUser = new User(user, idGenerator)
 
     // Assert
     expect(newUser).toBeInstanceOf(User);
-    expect(newUser.getUserDetails().id).toBeInstanceOf(UUID)
-    expect(newUser.getUserDetails().role).toBe('USER')
+    expect(newUser.getUserDetails().role).toBe('USER');
   });
 
   it('should create a admin user', () => {
@@ -37,9 +34,10 @@ describe('User Entity', () => {
       birthDate: '1998-01-29',
       role: 'ADMIN'
     }
+    const idGenerator = new CryptoUUID();
 
     // Act
-    const newUser = new User(user)
+    const newUser = new User(user, idGenerator)
 
     // Assert
     expect(newUser).toBeInstanceOf(User)
@@ -55,9 +53,10 @@ describe('User Entity', () => {
       email: 'teste@teste.com',
       birthDate: '1998-01-29'
     }
+    const idGenerator = new CryptoUUID();
 
     // Act
-    const newUser = new User(user);
+    const newUser = new User(user, idGenerator);
     const userInfo = newUser.getUserDetails();
 
     // Assert

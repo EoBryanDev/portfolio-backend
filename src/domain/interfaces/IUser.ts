@@ -6,7 +6,7 @@ interface IUser {
 }
 
 interface IUserProps {
-  id?: IId;
+  id?: string;
   firstName: string;
   lastName: string;
   password: string;
@@ -17,8 +17,5 @@ interface IUserProps {
   active?: boolean;
 }
 
-interface IId {
-  id: string
-}
 
-export { IUser, IUserProps, IId }
+export { IUser, IUserProps }
