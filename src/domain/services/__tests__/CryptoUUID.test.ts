@@ -1,10 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { CryptoUUID } from "../CryptoUUID";
+import { CryptoUUIDAdapter } from "../CryptoUUIDAdapter";
 
-describe('CryptoUUID', () => {
+describe('CryptoUUIDAdapter', () => {
   it('should return a uuid', () => {
     // Arrange
-    const cryptUUID = new CryptoUUID();
+    const cryptUUID = new CryptoUUIDAdapter();
     // Act
     const uuid = cryptUUID.getId();
 
