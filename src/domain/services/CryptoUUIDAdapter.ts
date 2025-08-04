@@ -1,7 +1,7 @@
 import { randomUUID } from "node:crypto";
 import { Id } from "../interfaces/Id";
 
-class CryptoUUID extends Id {
+class CryptoUUIDAdapter extends Id {
   protected id: string = "";
   constructor() {
     super();
@@ -19,4 +19,4 @@ class CryptoUUID extends Id {
 
 }
 
-export { CryptoUUID }
+export { CryptoUUIDAdapter }
