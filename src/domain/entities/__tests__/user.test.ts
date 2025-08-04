@@ -1,7 +1,7 @@
 import { IUserProps } from '@/domain/interfaces/RootUser'
 import { describe, it, expect } from 'vitest'
 import { User } from '../User'
-import { CryptoUUID } from '../../services/CryptoUUID';
+import { CryptoUUIDAdapter } from '../../services/CryptoUUIDAdapter';
 
 describe('User Entity', () => {
 
@@ -14,7 +14,7 @@ describe('User Entity', () => {
       email: 'teste@teste.com',
       birthDate: '1998-01-29'
     }
-    const idGenerator = new CryptoUUID();
+    const idGenerator = new CryptoUUIDAdapter();
 
     // Act
     const newUser = new User(user, idGenerator);
@@ -34,7 +34,7 @@ describe('User Entity', () => {
       birthDate: '1998-01-29',
       role: 'ADMIN'
     }
-    const idGenerator = new CryptoUUID();
+    const idGenerator = new CryptoUUIDAdapter();
 
     // Act
     const newUser = new User(user, idGenerator)
@@ -53,7 +53,7 @@ describe('User Entity', () => {
       email: 'teste@teste.com',
       birthDate: '1998-01-29'
     }
-    const idGenerator = new CryptoUUID();
+    const idGenerator = new CryptoUUIDAdapter();
 
     // Act
     const newUser = new User(user, idGenerator);
