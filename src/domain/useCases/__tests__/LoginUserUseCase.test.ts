@@ -2,6 +2,8 @@ import { User } from "../../entities/User";
 import { CryptoUUIDAdapter } from "../../services/CryptoUUIDAdapter";
 import { InMemoryUserRepository } from "../../../infrastructure/database/InMemoryDatabase";
 import { describe, expect, it } from "vitest";
+import { LoginUserUseCase } from "../LoginUserUseCase";
+import { JWTAdapter } from "../../../domain/services/JWTAdapter";
 
 describe('LoginUser Use Case', () => {
   // Arrange
@@ -14,22 +16,36 @@ describe('LoginUser Use Case', () => {
   }
   const user = new User(mock, new CryptoUUIDAdapter())
   const inMemoryUserRepository = new InMemoryUserRepository([user]);
-  it('should valid if user exists', async () => {
+
+  it('should has an error if does not exist a email', async () => {
 
     // Arrange
+    const login = new LoginUserUseCase(inMemoryUserRepository, new JWTAdapter())
+
     const payloadUser = {
-      email: 'teste@teste.com',
+      email: 'teste2@teste.com',
       password: '1234'
-    }
+    };
 
-    // Act
-    const validUser = await inMemoryUserRepository.findByEmail(payloadUser.email);
-
-    // Assert
-    expect(validUser).toBeInstanceOf(User);
+    // Act & Assert
+    await expect(login.execute(payloadUser)).rejects.toThrow();
 
   })
-  it('should not return a user if it does not exists', async () => {
+  it('should has an error if password be different', async () => {
+
+    // Arrange
+    const login = new LoginUserUseCase(inMemoryUserRepository, new JWTAdapter())
+
+    const payloadUser = {
+      email: 'teste@teste.com',
+      password: '12345'
+    };
+
+    // Act & Assert
+    await expect(login.execute(payloadUser)).rejects.toThrow();
+
+  })
+  /*it('should not return a user if it does not exists', async () => {
 
     // Arrange
     const payloadUser = {
@@ -77,5 +93,5 @@ describe('LoginUser Use Case', () => {
     expect(payloadUser.email).toEqual(email);
     expect(payloadUser.password).toEqual(password);
 
-  })
+  })*/
 })
