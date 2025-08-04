@@ -1,8 +1,14 @@
 import { TRoles } from "../types/TRoles";
 
 interface IUser {
-  id?: string;
-  username: string;
+  props: IUserProps
+  getUserDetails: () => IUserProps
+}
+
+interface IUserProps {
+  id?: IId;
+  firstName: string;
+  lastName: string;
   password: string;
   email: string;
   role?: TRoles;
@@ -11,4 +17,8 @@ interface IUser {
   active?: boolean;
 }
 
-export { IUser }
+interface IId {
+  id: string
+}
+
+export { IUser, IUserProps, IId }

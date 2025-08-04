@@ -1,23 +1,27 @@
-import { IUser } from "../interfaces/IUser"
+import { IUser, IUserProps } from "../interfaces/IUser"
+import { UUID } from "../services/UUID";
 
 
-class User {
-  private props: IUser;
+class User implements IUser {
+  props: IUserProps;
 
-  constructor(props: IUser) {
+  constructor(props: IUserProps) {
 
-    const user: IUser = {
+    const user: IUserProps = {
       ...props,
-      id: props.id ? props.id : '123',
+      id: new UUID(),
       createdAt: props.createdAt ? props.createdAt : new Date().toISOString(),
       active: props.active ? props.active : true,
       role: props.role ? props.role : 'USER'
     }
 
+    console.log(user);
+
+
     this.props = user
   }
 
-  getUserInfo() {
+  getUserDetails() {
     return this.props
   }
 
