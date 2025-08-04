@@ -1,28 +1,33 @@
-import { IId } from "../interfaces/IId";
-import { IUser, IUserProps } from "../interfaces/IUser"
+import { Id } from "../interfaces/Id";
+import { RootUser, IUserProps, IUserDetails } from "../interfaces/RootUser"
 
 
-class User implements IUser {
-  props: IUserProps;
+class User extends RootUser {
+  protected props: IUserProps;
 
-  constructor(props: IUserProps, idGenerator: IId) {
-
+  constructor(props: IUserProps, idGenerator: Id) {
+    super();
     const user: IUserProps = {
       ...props,
-      id: idGenerator.generate(),
-      createdAt: props.createdAt ? props.createdAt : new Date().toISOString(),
-      active: props.active ? props.active : true,
-      role: props.role ? props.role : 'USER'
+      id: idGenerator,
+      createdAt: props.createdAt ?? new Date().toISOString(),
+      active: props.active ?? true,
+      role: props.role ?? 'USER'
     }
-
-    console.log(user);
-
 
     this.props = user
   }
 
-  getUserDetails() {
-    return this.props
+  public getUserDetails() {
+    const userId = this.props.id!
+    const user: IUserDetails = {
+      ...this.props,
+      id: userId.getId(),
+      createdAt: this.props.createdAt!,
+      active: this.props.active!,
+      role: this.props.role!
+    }
+    return user
   }
 
 }

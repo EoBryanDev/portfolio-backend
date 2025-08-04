@@ -1,4 +1,4 @@
-import { IUserProps } from '@/domain/interfaces/IUser'
+import { IUserProps } from '@/domain/interfaces/RootUser'
 import { describe, it, expect } from 'vitest'
 import { User } from '../User'
 import { CryptoUUID } from '../../services/CryptoUUID';
@@ -17,7 +17,7 @@ describe('User Entity', () => {
     const idGenerator = new CryptoUUID();
 
     // Act
-    const newUser = new User(user, idGenerator)
+    const newUser = new User(user, idGenerator);
 
     // Assert
     expect(newUser).toBeInstanceOf(User);
