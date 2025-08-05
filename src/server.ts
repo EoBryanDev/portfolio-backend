@@ -1,15 +1,5 @@
-import fastifyCors from "@fastify/cors";
-import { fastify } from "fastify";
 import { env } from "../env";
+import { Application } from "./infrastructure/http/Application";
 
-const app = fastify();
-
-app.register(fastifyCors);
-
-app.get('/health', () => {
-  return 'OK'
-});
-
-app.listen({ port: env.DEV_PORT }, () => {
-  console.log('Servidor rodando na porta 3000');
-})
+const app = new Application('fastify');
+app.start(env.DEV_PORT);
