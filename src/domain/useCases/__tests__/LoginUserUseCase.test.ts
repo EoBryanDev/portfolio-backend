@@ -45,53 +45,21 @@ describe('LoginUser Use Case', () => {
     await expect(login.execute(payloadUser)).rejects.toThrow();
 
   })
-  /*it('should not return a user if it does not exists', async () => {
+  it('should return a jwt token', async () => {
 
     // Arrange
-    const payloadUser = {
-      email: 'teste2@teste.com',
-      password: '1234'
-    }
-
-    // Act
-    const validUser = await inMemoryUserRepository.findByEmail(payloadUser.email);
-
-    // Assert
-    expect(validUser).not.toBeInstanceOf(User);
-
-  })
-  it('should not pass if credentials are incorrect', () => {
-    // Arrange
-    const usersRegistered: { email: string, password: string }[] | [] = []
+    const login = new LoginUserUseCase(inMemoryUserRepository, new JWTAdapter())
 
     const payloadUser = {
       email: 'teste@teste.com',
-      password: '123'
-    }
+      password: '1234'
+    };
 
-    const validCredentials = usersRegistered.find(user => {
-      return payloadUser.email === user.email && payloadUser.password === user.password
-    });
-    // Act
+    const loginResponse = await login.execute(payloadUser);
 
-    // Assert
-    expect(validCredentials).not.toBeTruthy()
+    // Act & Assert
+    expect(loginResponse).toHaveProperty('access_token');
 
   })
-  it('should pass if credentials are correct', async () => {
-    // Arrange
-    const payloadUser = {
-      email: 'teste@teste.com',
-      password: '1234'
-    }
 
-    // Act
-    const user = await inMemoryUserRepository.findByEmail(payloadUser.email);
-    const { email, password } = user!.getUserDetails();
-
-    // Assert
-    expect(payloadUser.email).toEqual(email);
-    expect(payloadUser.password).toEqual(password);
-
-  })*/
 })
