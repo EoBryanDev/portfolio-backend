@@ -1,6 +1,7 @@
+import { TRoles } from "../types/TRoles";
+
 interface IToken {
-  generate(): Promise<string>;
-  isValidToken(): Promise<boolean>;
+  generate(payload: { userId: string, role: TRoles }, expiration: unknown): string;
 }
 
 export { IToken }
